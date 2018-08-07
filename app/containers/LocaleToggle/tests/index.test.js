@@ -1,13 +1,13 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { browserHistory } from 'react-router';
+import { browserHistory } from 'react-router-dom';
 import { shallow, mount } from 'enzyme';
 
 import LocaleToggle, { mapDispatchToProps } from '../index';
 import { changeLocale } from '../../LanguageProvider/actions';
 import LanguageProvider from '../../LanguageProvider';
 
-import configureStore from '../../../store';
+import configureStore from '../../../configureStore';
 import { translationMessages } from '../../../i18n';
 
 describe('<LocaleToggle />', () => {
@@ -23,7 +23,7 @@ describe('<LocaleToggle />', () => {
         <LanguageProvider messages={translationMessages}>
           <LocaleToggle />
         </LanguageProvider>
-      </Provider>
+      </Provider>,
     );
     expect(renderedComponent.contains(<LocaleToggle />)).toBe(true);
   });
@@ -34,9 +34,11 @@ describe('<LocaleToggle />', () => {
         <LanguageProvider messages={translationMessages}>
           <LocaleToggle />
         </LanguageProvider>
-      </Provider>
+      </Provider>,
     );
-    expect(renderedComponent.contains(<option value="en">en</option>)).toBe(true);
+    expect(renderedComponent.contains(<option value="en">en</option>)).toBe(
+      true,
+    );
   });
 
   describe('mapDispatchToProps', () => {

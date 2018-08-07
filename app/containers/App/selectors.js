@@ -4,43 +4,26 @@
 
 import { createSelector } from 'reselect';
 
-const selectGlobal = (state) => state.get('global');
+const selectGlobal = state => state.get('global');
 
-const makeSelectCurrentUser = () => createSelector(
-  selectGlobal,
-  (globalState) => globalState.get('currentUser')
-);
+const selectRoute = state => state.get('route');
 
-const makeSelectLoading = () => createSelector(
-  selectGlobal,
-  (globalState) => globalState.get('loading')
-);
+const makeSelectCurrentUser = () =>
+  createSelector(selectGlobal, globalState => globalState.get('currentUser'));
 
-const makeSelectError = () => createSelector(
-  selectGlobal,
-  (globalState) => globalState.get('error')
-);
+const makeSelectLoading = () =>
+  createSelector(selectGlobal, globalState => globalState.get('loading'));
 
-const makeSelectRepos = () => createSelector(
-  selectGlobal,
-  (globalState) => globalState.getIn(['userData', 'repositories'])
-);
+const makeSelectError = () =>
+  createSelector(selectGlobal, globalState => globalState.get('error'));
 
-const makeSelectLocationState = () => {
-  let prevRoutingState;
-  let prevRoutingStateJS;
+const makeSelectRepos = () =>
+  createSelector(selectGlobal, globalState =>
+    globalState.getIn(['userData', 'repositories']),
+  );
 
-  return (state) => {
-    const routingState = state.get('route'); // or state.route
-
-    if (!routingState.equals(prevRoutingState)) {
-      prevRoutingState = routingState;
-      prevRoutingStateJS = routingState.toJS();
-    }
-
-    return prevRoutingStateJS;
-  };
-};
+const makeSelectLocation = () =>
+  createSelector(selectRoute, routeState => routeState.get('location').toJS());
 
 export {
   selectGlobal,
@@ -48,5 +31,5 @@ export {
   makeSelectLoading,
   makeSelectError,
   makeSelectRepos,
-  makeSelectLocationState,
+  makeSelectLocation,
 };
