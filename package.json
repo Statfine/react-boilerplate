@@ -144,6 +144,8 @@
     ]
   },
   "dependencies": {
+    "@material-ui/core": "^3.0.1",
+    "@material-ui/icons": "^3.0.1",
     "@sentry/browser": "^4.0.0-beta.12",
     "babel-polyfill": "6.26.0",
     "chalk": "2.4.1",

@@ -17,6 +17,11 @@ import createHistory from 'history/createBrowserHistory';
 // import { init, captureMessage } from '@sentry/browser';
 import 'sanitize.css/sanitize.css';
 
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+// import purple from '@material-ui/core/colors/purple';
+import green from '@material-ui/core/colors/green';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
 // Import root app
 import App from 'containers/App';
 
@@ -47,15 +52,35 @@ const MOUNT_NODE = document.getElementById('app');
 // });
 // captureMessage('Hello, world!');
 
+// A theme with custom primary and secondary color.
+// It's optional.
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#5393ff',
+      main: '#2979ff',
+      dark: '#1c54b2',
+    },
+    secondary: {
+      light: green[300],
+      main: green[500],
+      dark: green[700],
+    },
+  },
+});
+
 const render = messages => {
   ReactDOM.render(
-    <Provider store={store}>
-      <LanguageProvider messages={messages}>
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
-      </LanguageProvider>
-    </Provider>,
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <Provider store={store}>
+        <LanguageProvider messages={messages}>
+          <ConnectedRouter history={history}>
+            <App />
+          </ConnectedRouter>
+        </LanguageProvider>
+      </Provider>
+    </MuiThemeProvider>,
     MOUNT_NODE,
   );
 };
