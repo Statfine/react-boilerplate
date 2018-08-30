@@ -14,6 +14,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
+// import { init, captureMessage } from '@sentry/browser';
 import 'sanitize.css/sanitize.css';
 
 // Import root app
@@ -41,6 +42,10 @@ const initialState = {};
 const history = createHistory();
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
+// init({
+//   dsn: 'http://3977bfd1cb3646759bb0005e9ea3b4a9@47.93.198.98:9000//3',
+// });
+// captureMessage('Hello, world!');
 
 const render = messages => {
   ReactDOM.render(
