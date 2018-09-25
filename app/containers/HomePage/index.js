@@ -15,6 +15,19 @@ import messages from './messages';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class HomePage extends React.PureComponent {
+  componentDidMount() {
+    window.addEventListener('mousewheel', this.onMouseWheel);
+    window.addEventListener('scroll', this.onWindowScroll);
+  }
+
+  onMouseWheel = () => {
+    console.log('onMouseWheel');
+  }
+
+  onWindowScroll = () => {
+    console.log('onWindowScroll');
+  }
+
   render() {
     return (
       <h1>
