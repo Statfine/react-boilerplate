@@ -20,6 +20,7 @@ import NewPagePage from 'containers/NewPage/Loadable';
 import MaterialPage from 'containers/MaterialPage/Loadable';
 import StateAsynTestPage from 'containers/StateAsynTest/Loadable';
 import ComAndPureComPage from 'containers/ComAndPureCom/Loadable';
+import ImmutablePagePage from 'containers/ImmutablePage';
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
         <Route exact path="/material" component={MaterialPage} /> {/* material组件 */}
         <Route exact path="/state" component={StateAsynTestPage} /> {/* setState */}
         <Route exact path="/purecom" component={ComAndPureComPage} /> {/* componen和PureComponent */}
+        <Route exact path="/immutable" component={ImmutablePagePage} /> {/* immutable */}
         <Route component={NotFoundPage} />
       </Switch>
     </div>

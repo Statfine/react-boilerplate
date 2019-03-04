@@ -12,6 +12,10 @@ import { compose } from 'redux';
 import Test1 from './Test1';
 import Test2 from './Test2';
 
+/**
+ * Component下
+ * Component和PureComponent对比
+ */
 export class ComAndPureCom extends React.Component {
   state = {
     val: 1,
