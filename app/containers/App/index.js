@@ -18,14 +18,18 @@ import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import NewPagePage from 'containers/NewPage/Loadable';
 import MaterialPage from 'containers/MaterialPage/Loadable';
+import StateAsynTestPage from 'containers/StateAsynTest/Loadable';
+import ComAndPureComPage from 'containers/ComAndPureCom/Loadable';
 
 export default function App() {
   return (
     <div>
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/new" component={NewPagePage} />
-        <Route exact path="/material" component={MaterialPage} />
+        <Route exact path="/new" component={NewPagePage} /> {/* 新生命周期 */}
+        <Route exact path="/material" component={MaterialPage} /> {/* material组件 */}
+        <Route exact path="/state" component={StateAsynTestPage} /> {/* setState */}
+        <Route exact path="/purecom" component={ComAndPureComPage} /> {/* componen和PureComponent */}
         <Route component={NotFoundPage} />
       </Switch>
     </div>

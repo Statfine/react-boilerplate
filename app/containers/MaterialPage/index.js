@@ -28,12 +28,12 @@ const Container = styled.div`
 
 const OverridesBtn = styled(Button)`
   background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
-  borderRadius: 3;
+  border-radius: 13;
   border: 0;
-  color: 'white';
+  color: white;
   height: 48;
-  padding: '0 30px';
-  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)';
+  padding: 0 30px;
+  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
 `;
 
 export default class MaterialPage extends React.PureComponent {
