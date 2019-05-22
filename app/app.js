@@ -6,21 +6,21 @@
  */
 
 // Needed for redux-saga es6 generator support
-import 'babel-polyfill';
+import '@babel/polyfill';
 
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
-import createHistory from 'history/createBrowserHistory';
-// import { init, captureMessage } from '@sentry/browser';
-import 'sanitize.css/sanitize.css';
+import { ConnectedRouter } from 'connected-react-router/immutable';
+import history from 'utils/history';
+// import 'sanitize.css/sanitize.css';
 
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-// import purple from '@material-ui/core/colors/purple';
-import green from '@material-ui/core/colors/green';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { LocaleProvider } from 'antd';
+import zhCN from 'antd/lib/locale-provider/zh_CN';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import 'antd/dist/antd.less';
 
 // Import root app
 import App from 'containers/App';
@@ -31,56 +31,32 @@ import LanguageProvider from 'containers/LanguageProvider';
 // Load the favicon and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';
-import 'file-loader?name=[name].[ext]!./.htaccess';
+import 'file-loader?name=.htaccess!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
 
 import configureStore from './configureStore';
+import { requestInjectStore } from './utils/request';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
 
-// Import CSS reset and Global Styles
-import './global-styles';
+moment.locale('zh-cn');
 
 // Create redux store with history
 const initialState = {};
-const history = createHistory();
 const store = configureStore(initialState, history);
+requestInjectStore(store);
 const MOUNT_NODE = document.getElementById('app');
-// init({
-//   dsn: 'http://3977bfd1cb3646759bb0005e9ea3b4a9@47.93.198.98:9000//3',
-// });
-// captureMessage('Hello, world!');
-
-// A theme with custom primary and secondary color.
-// It's optional.
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: '#5393ff',
-      main: '#2979ff',
-      dark: '#1c54b2',
-    },
-    secondary: {
-      light: green[300],
-      main: green[500],
-      dark: green[700],
-    },
-  },
-});
 
 const render = messages => {
   ReactDOM.render(
-    <MuiThemeProvider theme={theme}>
-      <CssBaseline />
-      <Provider store={store}>
-        <LanguageProvider messages={messages}>
-          <ConnectedRouter history={history}>
-            <App />
-          </ConnectedRouter>
-        </LanguageProvider>
-      </Provider>
-    </MuiThemeProvider>,
+    <Provider store={store}>
+      <LanguageProvider messages={messages}>
+        <ConnectedRouter history={history}>
+          <LocaleProvider locale={zhCN}><App /></LocaleProvider>
+        </ConnectedRouter>
+      </LanguageProvider>
+    </Provider>,
     MOUNT_NODE,
   );
 };

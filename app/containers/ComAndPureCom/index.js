@@ -20,8 +20,10 @@ export class ComAndPureCom extends React.Component {
   state = {
     val: 1,
   }
+
   handleClickChangeState = () => this.setState({ val: 2 })
   // handleClickChangeState = () => this.setState({ val: this.state.val + 1 })
+  
   render() {
     const { val } = this.state;
     console.log('val', val);
